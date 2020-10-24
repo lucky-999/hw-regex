@@ -1,5 +1,11 @@
 export default class Validator {
-    validateUsername(name) {
-        return /^[a-z][\w-]*[a-z]$/i.test(name) && !/\d{4}/.test(name);
+    constructor(username) {
+      if (typeof username !== 'string') throw new Error('Некорректный тип данных, требуется строка');
+      this.username = username;
     }
-}
+  
+    validateUsername() {
+      return (this.username.search(/^[a-zA-Z]+[\da-zA-Z_-]*[a-zA-Z]+$/) !== -1
+        && this.username.search(/\d{4,}/) === -1);
+    }
+  }
